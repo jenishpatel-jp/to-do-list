@@ -3,13 +3,14 @@
 import React, { useState } from 'react'
 import { Button } from './ui/button'
 
-const Input = () => {
+
+const TodoForm = () => {
 
   const [description, setDescription] = useState<string>('');
   const [priority, setPriority] = useState<string>('')
 
   const handleSubmit = (e:React.FormEvent) => {
-    e.preventDefault();
+
   }
 
   return (
@@ -39,9 +40,9 @@ const Input = () => {
 
         </select>
       </div>
-      <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700' >Add Todo</Button>
+      <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700'>Add Todo</Button>
     </form>
   )
 }
 
-export default Input;
+export default TodoForm;
