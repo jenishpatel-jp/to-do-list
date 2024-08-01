@@ -2,9 +2,24 @@
 
 import List from "@/components/list";
 import TodoForm from "../components/todoForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+
+  
+  useEffect(() => {
+    const fetchTestConnection = async () => {
+      try {
+        const response = await fetch('/api/connect');
+        const result = await response.json();
+        console.log(result)
+      } catch (error){
+        console.error(error)
+      }
+    }
+    fetchTestConnection();
+  }, [])
+
 
 
   return (
