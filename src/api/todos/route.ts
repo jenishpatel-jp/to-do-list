@@ -9,7 +9,7 @@ export async function GET(){
         const todos = await Todo.find();
         return NextResponse.json(todos);
     } catch (err){
-        return console.error(err);
+        return NextResponse.json({message: "Todo not found", status: 404});
     }
 };
 
@@ -21,6 +21,6 @@ export async function POST(request: Request){
         });
         await newTodo.save();
     } catch (err){
-        return console.error(err);
+        return NextResponse.json({message: "Error creating todo", status: 400 })
     }
 }
