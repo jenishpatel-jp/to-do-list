@@ -7,10 +7,34 @@ import { Button } from './ui/button'
 const TodoForm = () => {
 
   const [description, setDescription] = useState<string>('');
-  const [priority, setPriority] = useState<string>('')
+  const [priority, setPriority] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
 
-  const handleSubmit = (e:React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(false);
 
+    try {
+      const response = await fetch('/api/todos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify( { description, priority }),
+      });
+
+      if (!response.ok){
+        throw new Error('Failed to create todo');
+      }
+
+      setDescription('');
+      setPriority('Medium');
+      setSuccess(true);
+    } catch(error: any){
+      setError(error.message);
+    }
   }
 
   return (
