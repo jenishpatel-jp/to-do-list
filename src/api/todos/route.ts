@@ -21,6 +21,6 @@ export async function POST(request: Request){
         });
         await newTodo.save();
     } catch (err){
-        return NextResponse.json({message: "Error creating todo", status: 400 })
+        return NextResponse.json({message: "Error creating todo", status: 500 })
     }
 }

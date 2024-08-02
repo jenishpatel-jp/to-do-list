@@ -10,7 +10,7 @@ export async function PATCH(request: Request, { params }: { params: { id: string
     try {
         const todo = await Todo.findById(id);
         if (!todo){
-            return console.error("error")
+            return NextResponse.json({ message: "Todo not found", error: 500 })
         }
 
         todo.completed = !todo.completed;
@@ -18,17 +18,17 @@ export async function PATCH(request: Request, { params }: { params: { id: string
 
         return NextResponse.json(todo);
     } catch (error) {
-        return NextResponse.error()
+        return NextResponse.json({ message: "Error updateing todo", error: 500 })
     }
 };
 
-export async function DELETE(request: Request, {params}: { params: {id:string} } ){
+export async function DELETE(request: Request, {params}: { params: {id: string} } ){
     const { id } = params;
 
     try {
         await Todo.findByIdAndDelete(id);
         return NextResponse.json({ message: 'Todo deleted' })
     }catch (error){
-        return NextResponse.error();
+        return NextResponse.json( { message: 'Error deleteing todo' });
     }
 };
