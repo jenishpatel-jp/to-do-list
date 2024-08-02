@@ -1,6 +1,10 @@
 import { Schema, model, models } from 'mongoose';
 
 const todoSchema = new Schema({
+    userId: {
+        type: String,
+        required: true,
+    },
     description: {
         type: String,
         required: true,
