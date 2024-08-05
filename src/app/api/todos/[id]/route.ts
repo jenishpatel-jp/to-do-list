@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import Todo from '@/models/Todo';
 
-connectDB();
 
 export async function PATCH(request: Request, { params }: { params: { id: string} }){
     const { id } = params;
 
     try {
+        await connectDB();
         const todo = await Todo.findById(id);
         if (!todo){
             return NextResponse.json({ message: "Todo not found", error: 500 })
@@ -24,8 +24,9 @@ export async function PATCH(request: Request, { params }: { params: { id: string
 
 export async function DELETE(request: Request, {params}: { params: {id: string} } ){
     const { id } = params;
-
+    
     try {
+        await connectDB();
         await Todo.findByIdAndDelete(id);
         return NextResponse.json({ message: 'Todo deleted' })
     }catch (error){
