@@ -2,10 +2,9 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Todo from "@/models/Todo";
 
-connectDB();
-
 export async function GET(){
     try {
+        await connectDB();
         const todos = await Todo.find();
         return NextResponse.json(todos);
     } catch (err){
@@ -15,12 +14,17 @@ export async function GET(){
 
 export async function POST(request: Request){
     try{
-        const { description, priority } = await request.json();
+        await connectDB();
+        const { userId, description, priority } = await request.json();
         const newTodo = new Todo({
-            description, priority, completed: false,
+            userId,
+            description, 
+            priority, 
+            completed: false,
         });
-        await newTodo.save();
+        const savedTodo = await newTodo.save();
+        return NextResponse.json(savedTodo, { status: 201 });
     } catch (err){
-        return NextResponse.json({message: "Error creating todo", status: 500 })
+        return NextResponse.json({message: "Error creating todo", status: 500 });
     }
 }

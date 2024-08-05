@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Button } from './ui/button'
-
+import React, { useState } from 'react';
+import { Button } from './ui/button';
+import { useUser } from '@clerk/nextjs';
 
 const TodoForm = () => {
 
+  const { isSignedIn, user } = useUser();
   const [description, setDescription] = useState<string>('');
   const [priority, setPriority] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
@@ -16,13 +17,21 @@ const TodoForm = () => {
     setError(null);
     setSuccess(false);
 
+    if (!user) {
+      setError('You must be logged in to add a todo');
+      return;
+    }
+
     try {
       const response = await fetch('/api/todos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify( { description, priority }),
+        body: JSON.stringify( { 
+          userId: user.id,
+          description, 
+          priority }),
       });
 
       if (!response.ok){
