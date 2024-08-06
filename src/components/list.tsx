@@ -1,32 +1,25 @@
-import React, { useState } from 'react'
-
-interface Todos {
-  _id: number;
-  userId: string;
-  descrpition: string;
-  priority: string, 
-  completed: boolean,
-}
+import React, { useState, useEffect } from 'react'
+import { Todos, getTodos } from '../lib/utils';
 
 const List = () => {
 
-  const [todos, setTodos] = useState<Todos | []> ([]);
+  const [todos, setTodos] = useState<Todos[]> ([]);
+  
+  useEffect(() => {
+    getTodos(setTodos);
+  }, []);
 
-  const getTodos = async () => {
-    const response = await fetch('/api/todos');
-    if(!response.ok){
-      throw new Error ('Failed to fetch todos');
-    } 
-    const json = await response.json();
-    console.log(json);
-    setTodos(json);
-  }
-
-  getTodos();
+  const listTodos = todos.map(todo =>
+    <div className='flex border'>
+      <p className='flex flex-1 m-2 p-2' >{todo.description}</p> 
+      <p className='m-2 p-2'>{todo.priority}</p>
+      <input type='checkbox' className='w-5 p-2 mr-2'/>
+    </div>
+  )
 
   return (
-    <div className='justify-center'>
-
+    <div className='justify-center border border-white p-2 m-2 flex-1'>
+        {listTodos}
     </div>
   )
 }

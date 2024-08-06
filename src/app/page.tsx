@@ -8,7 +8,7 @@ export default function Home() {
 
 
   return (
-    <main>
+    <main className="flex flex-col flex-1 h-full">
       <h1 className="flex justify-center p-4 m-4 text-5xl">To-do List</h1>
       <TodoForm/>
       <List />

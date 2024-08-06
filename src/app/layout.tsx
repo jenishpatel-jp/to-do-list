@@ -18,12 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className='bg-black text-white'>
+      <html lang="en" className="h-full">
+        <body className='bg-black text-white h-full flex flex-col'>
           <header className="flex justify-end">
             <Header />
           </header>
-          <main>
+          <main className="flex-1">
             {children}
           </main>
         </body>
