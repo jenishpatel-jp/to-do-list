@@ -42,7 +42,7 @@ const TodoForm: React.FC<TodoFormProps> = ( {description, setDescription} ) => {
           <option>High</option>
           <option>Medium</option>
           <option>Low</option>
-
+          
         </select>
       </div>
       <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700'>Add Todo</Button>

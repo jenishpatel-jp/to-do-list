@@ -3,11 +3,9 @@
 import List from "@/components/list";
 import TodoForm from "../components/todoForm";
 import { useState, useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
 
-  const { isSignedIn, user } = useUser();
   const [description, setDescription] = useState<string>('');
   const [priority, setPriority] = useState<string>('');
 
