@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Todos, getTodos, todoBgColor, updatePriority } from '../utils/listUtils';
+import { Todos, getTodos, todoBgColor, updatePriority, handlePriorityChange } from '../utils/listUtils';
 
 interface ListProps{
   priority: string;
@@ -14,10 +14,6 @@ const List: React.FC<ListProps> = ( {priority, setPriority} ) => {
     getTodos(setTodos);
   }, []);
 
-  const handlePriorityChange = async (id: number, newPriority: string) => {
-    await updatePriority(id, newPriority);
-    setTodos(todos.map(todo => todo._id === id ? { ...todo, priority: newPriority } : todo));
-  }
 
   const listTodos = todos.map(todo =>
     <div className={`flex border ${todoBgColor(todo.priority)} m-2 rounded-lg`}>
@@ -25,7 +21,7 @@ const List: React.FC<ListProps> = ( {priority, setPriority} ) => {
       <select 
         id='priority'
         value={todo.priority}
-        onChange={(e) => handlePriorityChange(todo._id, e.target.value)}
+        onChange={(e) => handlePriorityChange(todo._id, e.target.value, setTodos, todos)}
         className={`${todoBgColor(todo.priority)}`}>
           <option>High</option>
           <option>Medium</option>

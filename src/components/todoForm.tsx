@@ -1,5 +1,5 @@
 'use client'
-
+import { useUser } from "@clerk/nextjs";
 import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { handleSubmit } from '@/utils/todoUtils';
@@ -14,9 +14,12 @@ interface TodoFormProps{
 const TodoForm: React.FC<TodoFormProps> = ( {description, setDescription} ) => {
 
   const [priority, setPriority] = useState<string>('');
+  const { user } = useUser();
+
+  const onSubmit = user ? handleSubmit(description, setDescription, priority, setPriority, user) : (e: React.FormEvent) => e.preventDefault();
 
   return (
-    <form onSubmit={handleSubmit(description, setDescription, priority, setPriority)} className='border border-white p-2 m-2 flex justify-center'>
+    <form onSubmit={onSubmit} className='border border-white p-2 m-2 flex justify-center'>
       <div className='flex items-center p-2 w-3/4'>
         <label htmlFor='description' className='p-2'>Description:</label>
         <input

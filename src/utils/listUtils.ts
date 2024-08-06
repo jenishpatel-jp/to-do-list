@@ -18,8 +18,8 @@ export const getTodos = async (
         setTodos(json);
   };
   
-  //Updated the background colour of the todos based on thier priority
-  export const todoBgColor = (priority: string) => {
+//Updated the background colour of the todos based on thier priority
+export const todoBgColor = (priority: string) => {
     switch (priority){
       case 'High':
         return 'bg-red-600';
@@ -32,8 +32,8 @@ export const getTodos = async (
     } 
   }
   
-  //Function to update the priority of the todo
-  export const updatePriority = async (id: number, priority: string) => {
+//Function to update the priority of the todo
+export const updatePriority = async (id: number, priority: string) => {
     
     try {
       const response = await fetch(`/api/todos/${id}`, {
@@ -52,3 +52,30 @@ export const getTodos = async (
       console.error(error.message);
     }
   }
+
+//Function to handle priority change onChnage
+export const handlePriorityChange = async (
+    id: number, 
+    newPriority: string,
+    setTodos: React.Dispatch<React.SetStateAction<Todos[]>>,
+    todos: Todos[]
+) => {
+    await updatePriority(id, newPriority);
+    setTodos(todos.map(todo => todo._id === id ? { ...todo, priority: newPriority } : todo));
+  }
+
+//Function to update the completed status 
+export const updateStatus = async (id: number, completed: boolean) => {
+
+    try {
+        const response = await fetch(`/api/todos/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({completed})
+        })
+    } catch(error:any){
+        console.error(error.message)
+    }
+}

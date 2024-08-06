@@ -1,18 +1,16 @@
-import { useUser } from "@clerk/nextjs";
-const { user } = useUser();
-
 //handleSbumit function to create a new todo
 export const handleSubmit =  (
     description: string,
     setDescription: (description: string) => void,
     priority: string,
-    setPriority: (priority: string) => void
+    setPriority: (priority: string) => void,
+    user: {id: string}
     ) => async (e: React.FormEvent) => {
 
     e.preventDefault();
 
     if (!user) {
-      return;
+        throw new Error("You need to be logged in to create todos")
     }
 
     try {
