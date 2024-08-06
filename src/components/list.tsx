@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Todos, getTodos } from '../lib/utils';
+import { Todos, getTodos, todoBgColor } from '../lib/utils';
 
 const List = () => {
 
@@ -10,7 +10,7 @@ const List = () => {
   }, []);
 
   const listTodos = todos.map(todo =>
-    <div className='flex border'>
+    <div className={`flex border ${todoBgColor(todo.priority)} m-2 rounded-lg`}>
       <p className='flex flex-1 m-2 p-2' >{todo.description}</p> 
       <p className='m-2 p-2'>{todo.priority}</p>
       <input type='checkbox' className='w-5 p-2 mr-2'/>

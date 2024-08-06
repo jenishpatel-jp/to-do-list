@@ -23,3 +23,16 @@ export const getTodos = async (
       const json = await response.json();
       setTodos(json);
 };
+
+export const todoBgColor = (priority: string) => {
+  switch (priority){
+    case 'High':
+      return 'bg-red-600';
+    case 'Medium':
+      return 'bg-orange-600';
+    case 'Low':
+      return 'bg-green-600';
+    default:
+      return 'bg-green-600';
+  } 
+}
