@@ -4,10 +4,16 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { useUser } from '@clerk/nextjs';
 
-const TodoForm = () => {
+interface TodoFormProps{
+  description: string;
+  setDescription: (description: string) => void;
+  priority: string;
+  setPriority: (priority: string) => void;
+}
+
+const TodoForm: React.FC<TodoFormProps> = ( {description, setDescription} ) => {
 
   const { isSignedIn, user } = useUser();
-  const [description, setDescription] = useState<string>('');
   const [priority, setPriority] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);

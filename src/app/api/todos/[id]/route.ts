@@ -12,6 +12,17 @@ export async function PATCH(request: Request, { params }: { params: { id: string
         if (!todo){
             return NextResponse.json({ message: "Todo not found", error: 500 })
         }
+        
+        const body = await request.json();
+        const { priority, completed } = body;
+
+        if (priority !== undefined){
+            todo.priority = priority;
+        }
+
+        if (completed !== undefined){
+            todo.completed = completed;
+        }
 
         todo.completed = !todo.completed;
         await todo.save();

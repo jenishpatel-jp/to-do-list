@@ -13,6 +13,7 @@ export interface Todos {
   completed: boolean;
 }
 
+//Async function to retrieve todos from the database 
 export const getTodos = async (
   setTodos: React.Dispatch<React.SetStateAction<Todos[]>>
 ) => {
@@ -24,6 +25,7 @@ export const getTodos = async (
       setTodos(json);
 };
 
+//Updated the background colour of the todos based on thier priority
 export const todoBgColor = (priority: string) => {
   switch (priority){
     case 'High':
@@ -35,4 +37,25 @@ export const todoBgColor = (priority: string) => {
     default:
       return 'bg-green-600';
   } 
+}
+
+//Function to update the priority of the todo
+export const updatePriority = async (id: number, priority: string) => {
+  
+  try {
+    const response = await fetch(`/api/todos/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({priority})
+    });
+
+    if (!response.ok){
+      throw new Error('Failed to update priority');
+    }
+
+  } catch(error:any){
+    console.error(error.message);
+  }
 }
