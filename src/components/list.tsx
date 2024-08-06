@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Todos, getTodos, todoBgColor, updatePriority } from '../lib/utils';
+import { Todos, getTodos, todoBgColor, updatePriority } from '../utils/listUtils';
 
 interface ListProps{
   priority: string;
