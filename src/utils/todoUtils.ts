@@ -1,17 +1,15 @@
+import React from "react";
+import { Todos } from '@/utils/listUtils'
+
 //handleSbumit function to create a new todo
-export const handleSubmit =  (
+export const handleSubmit =  async(
     description: string,
     setDescription: (description: string) => void,
     priority: string,
     setPriority: (priority: string) => void,
-    user: {id: string}
-    ) => async (e: React.FormEvent) => {
-
-    e.preventDefault();
-
-    if (!user) {
-        throw new Error("You need to be logged in to create todos")
-    }
+    user: {id: string},
+    setTodos: React.Dispatch<React.SetStateAction<Todos[]>>
+    ) =>  {
 
     try {
       const response = await fetch('/api/todos', {
@@ -22,15 +20,21 @@ export const handleSubmit =  (
         body: JSON.stringify( { 
           userId: user.id,
           description, 
-          priority }),
+          priority,
+          completed: false 
+        }),
       });
 
       if (!response.ok){
         throw new Error('Failed to create todo');
       }
+
+      const newTodo = await response.json();
+
+      setTodos(prevTodos => [...prevTodos, newTodo])
       setDescription('');
       setPriority('Medium');
     } catch(error: any){
-        console.error(error.message);
+        console.error('Error creating todo:', error.message);
     }
   }

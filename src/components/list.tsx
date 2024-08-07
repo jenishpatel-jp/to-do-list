@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Todos, getTodos, todoBgColor, updatePriority, handlePriorityChange } from '../utils/listUtils';
+import React from 'react'
+import { Todos, todoBgColor, handlePriorityChange } from '../utils/listUtils';
 
 interface ListProps{
-  priority: string;
-  setPriority: (priority: string) => void;
+  todos: Todos[];
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>
 }
 
-const List: React.FC<ListProps> = ( {priority, setPriority} ) => {
-
-  const [todos, setTodos] = useState<Todos[]> ([]);
-  
-  useEffect(() => {
-    getTodos(setTodos);
-  }, []);
-
-
+const List: React.FC<ListProps> = ( {todos, setTodos} ) => {
   const listTodos = todos.map(todo =>
-    <div className={`flex border ${todoBgColor(todo.priority)} m-2 rounded-lg`}>
+    <div key={todo._id} className={`flex border ${todoBgColor(todo.priority)} m-2 rounded-lg`}>
       <p className='flex flex-1 m-2 p-2' >{todo.description}</p> 
       <select 
         id='priority'

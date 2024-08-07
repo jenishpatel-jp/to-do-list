@@ -3,20 +3,35 @@ import { useUser } from "@clerk/nextjs";
 import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { handleSubmit } from '@/utils/todoUtils';
+import { Todos } from '@/utils/listUtils'
 
 interface TodoFormProps{
   description: string;
   setDescription: (description: string) => void;
   priority: string;
   setPriority: (priority: string) => void;
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>
 }
 
-const TodoForm: React.FC<TodoFormProps> = ( {description, setDescription} ) => {
+const TodoForm: React.FC<TodoFormProps> = ({
+  description, 
+  setDescription, 
+  priority, 
+  setPriority, 
+  setTodos 
+}) => {
 
-  const [priority, setPriority] = useState<string>('');
   const { user } = useUser();
 
-  const onSubmit = user ? handleSubmit(description, setDescription, priority, setPriority, user) : (e: React.FormEvent) => e.preventDefault();
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (user){
+      handleSubmit(description, setDescription, priority, setPriority, user, setTodos)
+    } else {
+      throw new Error("Please login to create a todo");
+    }
+
+  }
 
   return (
     <form onSubmit={onSubmit} className='border border-white p-2 m-2 flex justify-center'>

@@ -3,11 +3,17 @@
 import List from "@/components/list";
 import TodoForm from "../components/todoForm";
 import { useState, useEffect } from "react";
+import { Todos, getTodos } from '../utils/listUtils'
 
 export default function Home() {
 
   const [description, setDescription] = useState<string>('');
   const [priority, setPriority] = useState<string>('');
+  const [todos, setTodos] = useState<Todos[]> ([]);
+
+  useEffect(() => {
+    getTodos(setTodos)
+  }, []);
 
   return (
     <main className="flex flex-col flex-1 h-full">
@@ -17,10 +23,11 @@ export default function Home() {
         setDescription={setDescription} 
         priority={priority}
         setPriority={setPriority}
+        setTodos={setTodos}
       />
       <List 
-        priority={priority}
-        setPriority={setPriority}
+        todos={todos}
+        setTodos={setTodos}
       />
     </main>
   );
