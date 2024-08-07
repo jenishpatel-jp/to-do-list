@@ -54,7 +54,7 @@ export const updatePriority = async (id: number, priority: string) => {
     }
   }
 
-//Function to handle priority change onChnage
+//Updated the todo state and renders the todos
 export const handlePriorityChange = async (
     id: number, 
     newPriority: string,
@@ -66,17 +66,35 @@ export const handlePriorityChange = async (
   }
 
 //Function to update the completed status 
-export const updateStatus = async (id: number, completed: boolean) => {
+export const updateStatus = async (
+    id: number, 
+    completed: boolean,
 
+) => {
     try {
         const response = await fetch(`/api/todos/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({completed})
-        })
+            body: JSON.stringify({ completed })
+        });
+
+        if (!response.ok){
+          throw new Error('Failed  to update priority');
+        }
     } catch(error:any){
         console.error(error.message)
     }
 }
+
+//Update the todo list 
+export const handleStatusChange = async (
+  id: number, 
+  updatedStatus: boolean, 
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>,
+  todos: Todos[]
+) => {
+  await updateStatus(id, updatedStatus);
+  setTodos(todos.map(todo => todo._id === id ? { ...todo, completed: updatedStatus } : todo));
+};

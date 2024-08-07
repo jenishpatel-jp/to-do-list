@@ -1,5 +1,5 @@
 import React from 'react'
-import { Todos, todoBgColor, handlePriorityChange, updateStatus } from '../utils/listUtils';
+import { Todos, todoBgColor, handlePriorityChange, handleStatusChange } from '../utils/listUtils';
 import { CircleCheckBig } from 'lucide-react'
 
 interface ListProps{
@@ -22,7 +22,7 @@ const List: React.FC<ListProps> = ( {todos, setTodos} ) => {
       </select>
       <button 
         className={`mx-7`} 
-        onClick={()=> updateStatus(todo._id, todo.completed)}
+        onClick={()=> handleStatusChange(todo._id, todo.completed, setTodos, todos)}
         >
         <CircleCheckBig size={28} className='hover:w-10 hover:h-10'/>
       </button>

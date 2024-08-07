@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Todos } from '@/utils/listUtils'
 import { RotateCcw, Trash } from 'lucide-react';
 
@@ -18,7 +18,6 @@ const Completed: React.FC<CompletedTodos> = ( {todos} ) => {
     </div>
     ):
     (<></>)
-    
     );
 
     return (
