@@ -60,7 +60,7 @@ const TodoForm: React.FC<TodoFormProps> = ({
           
         </select>
       </div>
-      <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700'>Add Todo</Button>
+      <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700 rounded-md'>Add Todo</Button>
     </form>
   )
 }
