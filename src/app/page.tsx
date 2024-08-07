@@ -3,8 +3,8 @@
 import List from "@/components/list";
 import TodoForm from "../components/todoForm";
 import { useState, useEffect } from "react";
-import { Todos, getTodos } from '../utils/listUtils'
-
+import { Todos, getTodos } from '../utils/listUtils';
+import Completed from "@/components/completed";
 export default function Home() {
 
   const [description, setDescription] = useState<string>('');
@@ -28,6 +28,9 @@ export default function Home() {
       <List 
         todos={todos}
         setTodos={setTodos}
+      />
+      <Completed 
+        todos={todos}
       />
     </main>
   );
