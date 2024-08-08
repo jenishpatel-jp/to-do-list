@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Todos, handleStatusChange } from '@/utils/listUtils'
 import { RotateCcw, Trash } from 'lucide-react';
+import { deleteTodo, handleDeleteTodo } from '@/utils/completedUtils';
 
 interface CompletedTodos{
     todos: Todos[];
@@ -18,7 +19,9 @@ const Completed: React.FC<CompletedTodos> = ( {todos, setTodos} ) => {
             >
                 <RotateCcw className=''/>
             </button>
-            <button>
+            <button
+                onClick={()=> handleDeleteTodo(todo._id, setTodos, todos)}
+            >
                 <Trash className=''/>
             </button>
         </div>
