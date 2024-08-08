@@ -31,6 +31,7 @@ export default function Home() {
       />
       <Completed 
         todos={todos}
+        setTodos={setTodos}
       />
     </main>
   );
