@@ -4,7 +4,7 @@ import { RotateCcw, Trash } from 'lucide-react';
 
 interface CompletedTodos{
     todos: Todos[];
-}
+};
 
 const Completed: React.FC<CompletedTodos> = ( {todos} ) => {
 

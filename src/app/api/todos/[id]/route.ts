@@ -24,7 +24,6 @@ export async function PATCH(request: Request, { params }: { params: { id: string
             todo.completed = completed;
         }
 
-        todo.completed = !todo.completed;
         await todo.save();
 
         return NextResponse.json(todo);
