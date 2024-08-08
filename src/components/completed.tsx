@@ -33,7 +33,7 @@ const Completed: React.FC<CompletedTodos> = ( {todos, setTodos} ) => {
     return (
         <div>
             <h1 className='text-2xl p-2 m-2'>Completed</h1>
-            <div className='border border-white p-2 m-2'>
+            <div className='p-2 m-2'>
                 {listCompleted}
             </div>
         </div>

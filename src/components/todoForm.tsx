@@ -37,7 +37,7 @@ const TodoForm: React.FC<TodoFormProps> = ({
   }
 
   return (
-    <form onSubmit={onSubmit} className='border border-white p-2 m-2 flex justify-center'>
+    <form onSubmit={onSubmit} className= 'p-2 m-2 flex justify-center'>
       <div className='flex items-center p-2 w-3/4'>
         <label htmlFor='description' className='p-2'>Description:</label>
         <input
@@ -63,9 +63,9 @@ const TodoForm: React.FC<TodoFormProps> = ({
           
         </select>
       </div>
-      <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700 rounded-md'>Add Todo</Button>
+      <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700 rounded-lg'>Add Todo</Button>
       <Button 
-        className='m-2 p-2 bg-red-400 hover:bg-red-700 rounded-md'
+        className='m-2 p-2 bg-red-400 hover:bg-red-700 rounded-lg'
         onClick={()=> handleDeleteAll(setTodos, todos)}
         >Reset</Button>
     </form>

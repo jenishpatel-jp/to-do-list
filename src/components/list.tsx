@@ -9,7 +9,7 @@ interface ListProps{
 
 const List: React.FC<ListProps> = ( {todos, setTodos} ) => {
   const listTodos = todos.map(todo => !todo.completed ? (
-    <div key={todo._id} className={`flex border ${todoBgColor(todo.priority)} m-2 rounded-lg opacity-85`}>
+    <div key={todo._id} className={`flex ${todoBgColor(todo.priority)} m-2 rounded-lg opacity-85`}>
       <p className='flex flex-1 m-2 p-2' >{todo.description}</p> 
       <select 
         id='priority'
@@ -31,7 +31,7 @@ const List: React.FC<ListProps> = ( {todos, setTodos} ) => {
   );
 
   return (
-    <div className='justify-center border border-white p-2 m-2 flex-1'>
+    <div className='justify-center p-2 m-2 flex-1'>
         {listTodos}
     </div>
   )
