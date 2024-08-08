@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Todos, handleStatusChange } from '@/utils/listUtils'
 import { RotateCcw, Trash } from 'lucide-react';
-import { deleteTodo, handleDeleteTodo } from '@/utils/completedUtils';
+import { handleDeleteTodo } from '@/utils/completedUtils';
+import { useUser } from '@clerk/nextjs'
 
 interface CompletedTodos{
     todos: Todos[];
@@ -10,8 +11,10 @@ interface CompletedTodos{
 
 const Completed: React.FC<CompletedTodos> = ( {todos, setTodos} ) => {
 
-    const listCompleted = todos.map(todo => todo.completed ? (
-    <div key={todo._id} className='bg-green-500 flex p-2 m-2 items-center justify-between'>
+    const { user } = useUser();
+
+    const listCompleted = todos.map(todo => todo.completed && user?.id === todo.userId ? (
+    <div key={todo._id} className='bg-green-500 flex p-2 m-2 items-center justify-between rounded-lg'>
         <p className='flex' >{ todo.description }</p>
         <div className='flex w-16 h-9 items-center justify-between mr-5'>
             <button

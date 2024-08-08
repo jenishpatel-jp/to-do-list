@@ -1,6 +1,7 @@
 import React from 'react'
 import { Todos, todoBgColor, handlePriorityChange, handleStatusChange } from '../utils/listUtils';
 import { CircleCheckBig } from 'lucide-react'
+import { useUser } from '@clerk/nextjs';
 
 interface ListProps{
   todos: Todos[];
@@ -8,7 +9,10 @@ interface ListProps{
 };
 
 const List: React.FC<ListProps> = ( {todos, setTodos} ) => {
-  const listTodos = todos.map(todo => !todo.completed ? (
+
+  const { user } = useUser();
+
+  const listTodos = todos.map(todo => !todo.completed && user?.id === todo.userId ? (
     <div key={todo._id} className={`flex ${todoBgColor(todo.priority)} m-2 rounded-lg opacity-85`}>
       <p className='flex flex-1 m-2 p-2' >{todo.description}</p> 
       <select 
