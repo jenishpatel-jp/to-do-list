@@ -1,5 +1,5 @@
 import React from 'react'
-import { Todos, todoBgColor, handlePriorityChange, handleStatusChange } from '../utils/listUtils';
+import { Todos, todoBgColor, handlePriorityChange, handleStatusChange, comparePriority } from '../utils/listUtils';
 import { CircleCheckBig } from 'lucide-react'
 import { useUser } from '@clerk/nextjs';
 
@@ -12,7 +12,9 @@ const List: React.FC<ListProps> = ( {todos, setTodos} ) => {
 
   const { user } = useUser();
 
-  const listTodos = todos.map(todo => !todo.completed && user?.id === todo.userId ? (
+  const sortedTodos = todos.sort(comparePriority);
+
+  const listTodos = sortedTodos.map(todo => !todo.completed && user?.id === todo.userId ? (
     <div key={todo._id} className={`flex ${todoBgColor(todo.priority)} m-2 rounded-lg opacity-85 shadow-lg`}>
       <p className='flex flex-1 m-2 p-2 font-semibold' >{todo.description}</p> 
       <select 
@@ -31,8 +33,7 @@ const List: React.FC<ListProps> = ( {todos, setTodos} ) => {
         <CircleCheckBig size={28} className='hover:w-8 hover:h-8'/>
       </button>
     </div>
-  ):(<></>)
-  );
+  ):(<></>));
 
   return (
     <div className='justify-center p-2 m-2 flex-1 shadow-lg border-2 border-gray-200 rounded-lg'>

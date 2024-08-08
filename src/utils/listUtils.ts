@@ -98,3 +98,17 @@ export const handleStatusChange = async (
   await updateStatus(id, updatedStatus);
   setTodos(todos.map(todo => todo._id === id ? { ...todo, completed: updatedStatus } : todo));
 };
+
+
+//Sort Object
+
+export const priorityOrder: { [key in Todos['priority']]: number } = {
+  'High':1, 
+  'Medium':2,
+  'Low':3
+};
+
+//Sort function 
+export const comparePriority = (a:Todos, b:Todos) => {
+  return priorityOrder[a.priority] - priorityOrder[b.priority];
+}
