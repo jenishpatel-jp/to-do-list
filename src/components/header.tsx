@@ -7,7 +7,14 @@ const Header = () => {
   return (
     <div className='flex p-2 m-2'> 
         <SignedIn>
-            <UserButton/>
+            <UserButton appearance={{
+              elements: {
+                avatarBox:{
+                  height: 50,
+                  width:50,
+                }
+              }
+            }} />
         </SignedIn>
         <SignedOut>
             <Button asChild variant='secondary'>

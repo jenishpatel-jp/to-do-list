@@ -20,7 +20,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className="h-full">
         <body className='bg-slate-50 text-black h-full flex flex-col'>
-          <header className="flex justify-end">
+          <header className="flex justify-end h-50">
             <Header />
           </header>
           <main className="flex-1">
