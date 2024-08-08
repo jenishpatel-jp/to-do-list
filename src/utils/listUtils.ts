@@ -27,7 +27,7 @@ export const todoBgColor = (priority: string) => {
       case 'Medium':
         return 'bg-orange-500';
       case 'Low':
-        return 'bg-yellow-400 text-black';
+        return 'bg-yellow-400';
       default:
         return 'bg-green-600';
     } 

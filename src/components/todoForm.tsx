@@ -37,7 +37,7 @@ const TodoForm: React.FC<TodoFormProps> = ({
   }
 
   return (
-    <form onSubmit={onSubmit} className= 'p-2 m-2 flex justify-center'>
+    <form onSubmit={onSubmit} className= 'p-2 m-2 flex justify-center border-4 border-gray-200 shadow-lg rounded-lg'>
       <div className='flex items-center p-2 w-3/4'>
         <label htmlFor='description' className='p-2'>Description:</label>
         <input
@@ -46,7 +46,7 @@ const TodoForm: React.FC<TodoFormProps> = ({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
-          className='text-black w-full border border-white'
+          className='text-black w-full border border-gray-400'
         />
       </div>
       <div className='flex items-center space-x-2'>
@@ -67,7 +67,8 @@ const TodoForm: React.FC<TodoFormProps> = ({
       <Button 
         className='m-2 p-2 bg-red-400 hover:bg-red-700 rounded-lg'
         onClick={()=> handleDeleteAll(setTodos, todos)}
-        >Reset</Button>
+        >Reset
+      </Button>
     </form>
   )
 }
