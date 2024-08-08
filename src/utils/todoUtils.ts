@@ -38,3 +38,33 @@ export const handleSubmit =  async(
         console.error('Error creating todo:', error.message);
     }
   }
+
+//Delete all todo function 
+export const deleteAllTodo = async () => {
+
+  try {
+    const response = await fetch('/api/todos/delete-all', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok){
+      throw new Error('Failed to delete all the todos')
+    }
+
+  }catch(error: any){
+    console.error(error.message)
+  }
+}
+
+//Handle deleting all the todos
+
+export const handleDeleteAll = async (
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>,
+  todos: Todos[]
+) => {
+  await deleteAllTodo();
+  setTodos([]);
+};

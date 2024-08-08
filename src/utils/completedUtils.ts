@@ -12,7 +12,7 @@ export const deleteTodo = async (id: number) => {
         });
 
         if (!response.ok){
-            throw new Error('Failed to update priority');
+            throw new Error('Failed to delete todo');
         }
 
     } catch(error:any){
