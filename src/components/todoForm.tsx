@@ -4,13 +4,15 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { handleSubmit } from '@/utils/todoUtils';
 import { Todos } from '@/utils/listUtils'
+import { handleDeleteAll } from "@/utils/todoUtils";
 
 interface TodoFormProps{
   description: string;
   setDescription: (description: string) => void;
   priority: string;
   setPriority: (priority: string) => void;
-  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>;
+  todos: Todos[];
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({
@@ -18,7 +20,8 @@ const TodoForm: React.FC<TodoFormProps> = ({
   setDescription, 
   priority, 
   setPriority, 
-  setTodos 
+  setTodos,
+  todos
 }) => {
 
   const { user } = useUser();
@@ -61,7 +64,10 @@ const TodoForm: React.FC<TodoFormProps> = ({
         </select>
       </div>
       <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700 rounded-md'>Add Todo</Button>
-      <Button className='m-2 p-2 bg-red-400 hover:bg-red-700 rounded-md'>Reset</Button>
+      <Button 
+        className='m-2 p-2 bg-red-400 hover:bg-red-700 rounded-md'
+        onClick={()=> handleDeleteAll(setTodos, todos)}
+        >Reset</Button>
     </form>
   )
 }

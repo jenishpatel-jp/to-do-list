@@ -24,6 +24,7 @@ export default function Home() {
         priority={priority}
         setPriority={setPriority}
         setTodos={setTodos}
+        todos={todos}
       />
       <List 
         todos={todos}
