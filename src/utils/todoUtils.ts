@@ -1,5 +1,5 @@
 import React from "react";
-import { Todos } from '@/utils/listUtils'
+import { Todos } from '@/utils/listUtils';
 
 //handleSbumit function to create a new todo
 export const handleSubmit =  async(
@@ -63,8 +63,12 @@ export const deleteAllTodo = async () => {
 
 export const handleDeleteAll = async (
   setTodos: React.Dispatch<React.SetStateAction<Todos[]>>,
-  todos: Todos[]
+  todos: Todos[],
+  user: {
+    id: string
+  }
 ) => {
+  if (user){}
   await deleteAllTodo();
-  setTodos([]);
+  setTodos(todos.filter(todo => todo.userId !== user?.id));
 };

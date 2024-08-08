@@ -33,9 +33,17 @@ const TodoForm: React.FC<TodoFormProps> = ({
     } else {
       throw new Error("Please login to create a todo");
     }
-
   }
 
+  const handleReset = () => {
+    if (user && user.id) {
+      handleDeleteAll(setTodos, todos, { id: user.id });
+    } else {
+      throw new Error("Please login to reset todos");
+    }
+  };
+
+  
   return (
     <form onSubmit={onSubmit} className= 'p-2 m-2 flex justify-center border-4 border-gray-200 shadow-lg rounded-lg'>
       <div className='flex items-center p-2 w-3/4'>
@@ -56,7 +64,9 @@ const TodoForm: React.FC<TodoFormProps> = ({
           value={priority}
           onChange={e => setPriority(e.target.value)}
           className='text-black p-1 m-2 rounded-md'
+          required
         >
+          <option>--Select--</option>
           <option>High</option>
           <option>Medium</option>
           <option>Low</option>
@@ -66,7 +76,7 @@ const TodoForm: React.FC<TodoFormProps> = ({
       <Button type='submit' className='m-2 p-2 bg-green-400 hover:bg-green-700 rounded-lg'>Add Todo</Button>
       <Button 
         className='m-2 p-2 bg-red-400 hover:bg-red-700 rounded-lg'
-        onClick={()=> handleDeleteAll(setTodos, todos)}
+        onClick={handleReset}
         >Reset
       </Button>
     </form>
