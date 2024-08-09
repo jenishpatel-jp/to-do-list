@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Todos, handleStatusChange } from '@/utils/listUtils'
 import { RotateCcw, Trash } from 'lucide-react';
 import { handleDeleteTodo } from '@/utils/completedUtils';
@@ -13,7 +13,14 @@ const Completed: React.FC<CompletedTodos> = ( {todos, setTodos} ) => {
 
     const { user } = useUser();
 
+    const hasCompletedTodos = todos.some(todo => todo.completed && user?.id === todo.userId);
+
+    if (!hasCompletedTodos){
+        return null;
+    }
+    
     const listCompleted = todos.map(todo => todo.completed && user?.id === todo.userId ? (
+    
     <div key={todo._id} className='bg-green-500 flex p-2 m-2 items-center justify-between rounded-lg shadow-lg'>
         <p className='flex font-semibold' >{ todo.description }</p>
         <div className='flex w-16 h-9 items-center justify-between mr-5'>
@@ -35,7 +42,7 @@ const Completed: React.FC<CompletedTodos> = ( {todos, setTodos} ) => {
 
     return (
         <div className='border border-gray-200 shadow-lg p-2 m-2 rounded-lg'>
-            <h1 className='text-2xl p-2 m-2'>Completed</h1>
+            {hasCompletedTodos ? (<h1 className='text-2xl p-2 m-2'>Completed</h1>):(<></>)}
             <div className='p-2 m-2'>
                 {listCompleted}
             </div>
