@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col flex-1 h-full">
-      <h1 className="flex justify-center p-4 m-4 text-5xl text-blue-500 font-semibold drop-shadow-lg">Your To-do's</h1>
+      <h1 className="flex justify-center p-4 m-4 text-5xl text-blue-500 font-semibold drop-shadow-lg">Your To-do&apos;s</h1>
       <TodoForm 
         description={description} 
         setDescription={setDescription} 
