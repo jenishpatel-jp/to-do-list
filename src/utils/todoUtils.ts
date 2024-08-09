@@ -40,14 +40,15 @@ export const handleSubmit =  async(
   };
 
 //Delete all todo function 
-export const deleteAllTodo = async () => {
+export const deleteAllTodo = async (userId: string) => {
 
   try {
     const response = await fetch('/api/todos/delete-all', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({ userId }),
     });
 
     if (!response.ok){
@@ -69,7 +70,7 @@ export const handleDeleteAll = async (
   }
 ) => {
   if (user){
-    await deleteAllTodo();
-    setTodos(todos.filter(todo => todo.userId !== user?.id));
+    await deleteAllTodo(user.id);
+    setTodos(todos.filter(todo => user?.id === todo.userId));
   }
 };

@@ -1,6 +1,6 @@
 'use client'
 import { useUser } from "@clerk/nextjs";
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from './ui/button';
 import { handleSubmit } from '@/utils/todoUtils';
 import { Todos } from '@/utils/listUtils'
