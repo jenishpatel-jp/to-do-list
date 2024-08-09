@@ -68,7 +68,8 @@ export const handleDeleteAll = async (
     id: string
   }
 ) => {
-  if (user){}
-  await deleteAllTodo();
-  setTodos(todos.filter(todo => todo.userId !== user?.id));
+  if (user){
+    await deleteAllTodo();
+    setTodos(todos.filter(todo => todo.userId !== user?.id));
+  }
 };
