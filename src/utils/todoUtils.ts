@@ -37,7 +37,7 @@ export const handleSubmit =  async(
     } catch(error: any){
         console.error('Error creating todo:', error.message);
     }
-  }
+  };
 
 //Delete all todo function 
 export const deleteAllTodo = async () => {
