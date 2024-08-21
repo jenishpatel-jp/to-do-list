@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { RedirectToSignIn, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import React from 'react'
 import { Button } from './ui/button'
 
@@ -16,9 +16,7 @@ const Header = () => {
             }} />
         </SignedIn>
         <SignedOut>
-            <Button asChild variant='secondary' className=' bg-blue-400 text-white hover:bg-blue-700 shadow-lg'>
-                <SignInButton/>
-            </Button>
+          <RedirectToSignIn />
         </SignedOut>
     </div>
   )
